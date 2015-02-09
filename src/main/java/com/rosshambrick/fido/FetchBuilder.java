@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
-
 public class FetchBuilder {
     private static final String TAG = Fido.class.getSimpleName();
 
@@ -42,24 +38,24 @@ public class FetchBuilder {
         }
     }
 
-    public <T> Observable<T> asObservable(final Class<T> tClass) {
-        return Observable
-                .create(new Observable.OnSubscribe<T>() {
-                    @Override
-                    public void call(Subscriber<? super T> subscriber) {
-                        try {
-                            T data = as(tClass);
-                            if (data != null) {
-                                subscriber.onNext(data);
-                            }
-                            subscriber.onCompleted();
-                        } catch (Exception e) {
-                            subscriber.onError(e);
-                        }
-                    }
-                })
-                .subscribeOn(Schedulers.io());
-    }
+//    public <T> Observable<T> asObservable(final Class<T> tClass) {
+//        return Observable
+//                .create(new Observable.OnSubscribe<T>() {
+//                    @Override
+//                    public void call(Subscriber<? super T> subscriber) {
+//                        try {
+//                            T data = as(tClass);
+//                            if (data != null) {
+//                                subscriber.onNext(data);
+//                            }
+//                            subscriber.onCompleted();
+//                        } catch (Exception e) {
+//                            subscriber.onError(e);
+//                        }
+//                    }
+//                })
+//                .subscribeOn(Schedulers.io());
+//    }
 
     protected <T> JsonReader getReader(Class<T> tClass) {
         InputStreamReader reader;

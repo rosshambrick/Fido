@@ -4,9 +4,6 @@ import android.content.Context;
 
 import java.io.File;
 
-import rx.Observable;
-import rx.Subscriber;
-
 public class FetchIdsBuilder<T> {
     private final Context context;
     private final Class<T> tClass;
@@ -16,20 +13,20 @@ public class FetchIdsBuilder<T> {
         this.tClass = tClass;
     }
 
-    public Observable<String[]> asObservable() {
-        return Observable.create(new Observable.OnSubscribe<String[]>() {
-            @Override
-            public void call(Subscriber<? super String[]> subscriber) {
-                try {
-                    subscriber.onNext(asBlocking());
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        });
-
-    }
+//    public Observable<String[]> asObservable() {
+//        return Observable.create(new Observable.OnSubscribe<String[]>() {
+//            @Override
+//            public void call(Subscriber<? super String[]> subscriber) {
+//                try {
+//                    subscriber.onNext(asBlocking());
+//                    subscriber.onCompleted();
+//                } catch (Exception e) {
+//                    subscriber.onError(e);
+//                }
+//            }
+//        });
+//
+//    }
 
     public String[] asBlocking() {
         File filesDir = context.getFilesDir();

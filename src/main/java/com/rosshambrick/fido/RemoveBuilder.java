@@ -7,7 +7,7 @@ import java.io.File;
 public class RemoveBuilder<T> {
     private final Context context;
     private String key;
-    private final Class<T> tClass;
+    private Class<T> tClass;
 
     public RemoveBuilder(Context context, String key, Class<T> tClass) {
         this.context = context;
@@ -20,7 +20,7 @@ public class RemoveBuilder<T> {
         this.tClass = tClass;
     }
 
-    public void blocking() {
+    public void commit() {
         String folderName = tClass.getSimpleName().toLowerCase();
         File folderPath = new File(context.getFilesDir(), folderName);
         if (key != null) {
@@ -36,5 +36,20 @@ public class RemoveBuilder<T> {
                 }
             }
         }
+    }
+
+    public RemoveBuilder<T> remove(String key, Class<T> tClass) {
+        this.key = key;
+        this.tClass = tClass;
+        return this;
+    }
+
+    public RemoveBuilder remove(Class<T> tClass) {
+        this.tClass = tClass;
+        return this;
+    }
+
+    public void id(int key) {
+        this.key = String.valueOf(key);
     }
 }

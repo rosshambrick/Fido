@@ -81,6 +81,7 @@ public class Fido {
 
             Log.d(TAG, "found " + files.length + " files");
             for (File file : files) {
+                Log.d(TAG, "found " + file.getPath());
                 try {
                     FileReader fileReader = new FileReader(file);
 //                    JsonReader jsonReader = new JsonReader(fileReader);
